@@ -12,3 +12,4 @@
 */
 
 Route::get('/', 'NewsItemsController@list');
+Route::post('/news-items', 'NewsItemsController@create');
