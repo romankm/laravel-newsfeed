@@ -11,4 +11,4 @@
 |
 */
 
-Route::view('/', 'main');
+Route::get('/', 'NewsItemsController@list');

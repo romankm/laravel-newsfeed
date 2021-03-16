@@ -9,20 +9,18 @@
 </head>
 <body>
 
-<div class="d-flex align-items-center justify-content-center">
-    <h1> Main page </h1>
+<ul class="nav">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="admin">admin</a>
+    </li>
+</ul>
+
+<div class="container">
+    @yield('content')
 </div>
 
-<div class="container d-flex align-items-center justify-content-center">
-    <div>
-        <div class="card" style="width: 50rem;">
-            <div class="card-body">
-                <h5 class="card-title">Titi asfas Titi asfas Titi asfas Titi asfas </h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">content.</p>
-            </div>
-        </div>
-    </div>
-</div>
 </body>
 </html>
