@@ -17,4 +17,5 @@ GRANT ALL PRIVILEGES ON laravel_newsfeed_db.* TO 'laravel_newsfeed_user'@'localh
 4. Run migrations:
   php artisan migrate
 
-
+5. (optional) You may want to seed db with random data:
+  php artisan db:seed
