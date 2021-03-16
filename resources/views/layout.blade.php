@@ -11,10 +11,10 @@
 
 <ul class="nav">
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/">Home</a>
+        <a class="nav-link active" aria-current="page" href="/">news</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="admin">admin</a>
+        <a class="nav-link" href="admin">admin page (/admin)</a>
     </li>
 </ul>
 
