@@ -2,59 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Category;
 use App\NewsItem;
+use Illuminate\Http\Request;
 
 class NewsItemsController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $newsItems = NewsItem::with('category:id,name')
-            ->with('category:name')
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $newsItemsBuilder = NewsItem::with('category:id,name')
+            ->orderBy('created_at', 'desc');
+        $filterCategory = $request->get('category');
 
-        return view('news_items.index', compact('newsItems'));
-    }
+        if ($filterCategory) {
+            $newsItemsBuilder->where('category_id', '=', $filterCategory);
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $data = request()->validate([
-            'title' => 'required|min:3',
-            'body' => 'required|min:4',
+        $newsItems = $newsItemsBuilder->get();
+        $categories = Category::all();
+
+        return view('news_items.index', [
+            'newsItems' => $newsItems,
+            'categories' => $categories,
         ]);
-
-        $newsItem = new NewsItem;
-        $newsItem->title = request('title');
-        $newsItem->body = request('body');
-        $newsItem->save();
-
-        // dd(request('title'));
-        return back();
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        return view(
-
-        );
     }
 
     /**
@@ -68,39 +44,5 @@ class NewsItemsController extends Controller
         $newsItem = NewsItem::find($id);
 
         return view('news_items.show', compact('newsItem'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
