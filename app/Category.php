@@ -8,6 +8,6 @@ class Category extends Model
 {
     public function newsItems($method, $parameters)
     {
-        return $this->hasMany(NewsItem::class);
+        return $this->hasMany(NewsItem::class, 'category_id', id);
     }
 }

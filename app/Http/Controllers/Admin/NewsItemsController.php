@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\NewsItem;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class NewsItemsController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -15,12 +15,13 @@ class NewsItemsController extends Controller
      */
     public function index()
     {
-        $newsItems = NewsItem::with('category:id,name')
-            ->with('category:name')
+        $newsItems = NewsItem::select()
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('news_items.index', compact('newsItems'));
+        return view('admin.news_items.index', [
+            'newsItems' => $newsItems,
+        ]);
     }
 
     /**
@@ -30,18 +31,7 @@ class NewsItemsController extends Controller
      */
     public function create()
     {
-        $data = request()->validate([
-            'title' => 'required|min:3',
-            'body' => 'required|min:4',
-        ]);
-
-        $newsItem = new NewsItem;
-        $newsItem->title = request('title');
-        $newsItem->body = request('body');
-        $newsItem->save();
-
-        // dd(request('title'));
-        return back();
+        return view('admin.news_items.create');
     }
 
     /**
@@ -52,9 +42,21 @@ class NewsItemsController extends Controller
      */
     public function store(Request $request)
     {
-        return view(
+        $data = $request->validate([
+            'title' => 'required|min:3',
+            'body' => 'required|min:4',
+        ]);
 
-        );
+//        $newsItem = new NewsItem;
+//        $newsItem->title = request('title');
+//        $newsItem->body = request('body');
+//        $newsItem->save();
+        NewsItem::create($request->all());
+
+//         dd(request('title'));
+//        return back();
+//        return redirect()->route('newsItems.index')->with()
+        return redirect()->route('newsItems.index')->with('/');
     }
 
     /**
@@ -65,9 +67,7 @@ class NewsItemsController extends Controller
      */
     public function show($id)
     {
-        $newsItem = NewsItem::find($id);
-
-        return view('news_items.show', compact('newsItem'));
+        //
     }
 
     /**
