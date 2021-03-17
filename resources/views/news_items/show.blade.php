@@ -11,7 +11,7 @@
             </h5>
             <div class="card-subtitle mb-2 text-muted">
                 <div>{{ $newsItem->created_at }}</div>
-                <div>category:</div>
+                <div>category: {{ $newsItem->category->name }}</div>
             </div>
             <p class="card-text">
                 {{ $newsItem->body }}

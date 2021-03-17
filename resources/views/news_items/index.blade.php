@@ -10,14 +10,19 @@
                 <div class="container">
                     <form method="GET" action="/">
                         <label for="category" class="form-label mt-3">Category</label>
-                        <select name="category" class="form-select mb-3">
-                            <option selected>category</option>
+                        <select name="category" id="category" class="form-select mb-3">
+                            {{--Select filtered category--}}
+                            @if ($filterCategory)
+                                <option selected value="{{ $filterCategory->id }}">{{ $filterCategory->name }}</option>
+                            @else
+                                <option selected disabled value="">category</option>
+                            @endif
+
                             @foreach($categories as $key => $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
                         <button type="submit" class="btn btn-primary col-sm-12 mb-3">filter</button>
-                        {{--<button type="reset" class="btn btn-primary col-sm-12 mb-3">reset</button>--}}
                     </form>
                     <form method="GET" action="/">
                         <button type="submit" class="btn btn-primary col-sm-12 mb-3">clear</button>
@@ -25,11 +30,11 @@
                 </div>
             </div>
         </div>
+
         <div class="col-9">
             @foreach($newsItems as $newsItem)
                 <div class="card mb-1" >
                     <div class="card-body">
-
                         <h5 class="card-title">
                             <a href='{{ url('news-items' . '/' . $newsItem->id) }}'>
                                 {{ $newsItem->title }}
@@ -39,7 +44,7 @@
                             <div>{{ $newsItem->created_at }}</div>
                             <div>
                                 @if($newsItem->category)
-                                    {{ $newsItem->category->name }}
+                                    category: {{ $newsItem->category->name }}
                                 @endif
                             </div>
                         </div>
@@ -50,7 +55,5 @@
                 </div>
             @endforeach
         </div>
-
-
     </div>
 @endsection

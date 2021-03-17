@@ -18,18 +18,23 @@ class NewsItemsController extends Controller
     {
         $newsItemsBuilder = NewsItem::with('category:id,name')
             ->orderBy('created_at', 'desc');
-        $filterCategory = $request->get('category');
+        $filterCategoryId = $request->get('category');
+        $filterCategory = null;
+        $categoriesBuilder = Category::select();
 
-        if ($filterCategory) {
-            $newsItemsBuilder->where('category_id', '=', $filterCategory);
+        if ($filterCategoryId) {
+            $filterCategory = Category::find($filterCategoryId);
+            $newsItemsBuilder->where('category_id', '=', $filterCategoryId);
+            $categoriesBuilder->where('id', '!=', $filterCategoryId);
         }
 
         $newsItems = $newsItemsBuilder->get();
-        $categories = Category::all();
+        $categories = $categoriesBuilder->get();
 
         return view('news_items.index', [
-            'newsItems' => $newsItems,
-            'categories' => $categories,
+            'newsItems'      => $newsItems,
+            'categories'     => $categories,
+            'filterCategory' => $filterCategory,
         ]);
     }
 
