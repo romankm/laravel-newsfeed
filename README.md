@@ -1,8 +1,9 @@
 # laravel-newsfeed
 Laravel test project
 
-1. Install project dependencies:
-  composer install
+1. Install project dependencies and update autoload:
+  php composer.phar install
+  php composer.phar dump-autoload
 
 2. Create your .env and generate key:
   cp .env.example .env
