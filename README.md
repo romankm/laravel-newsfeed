@@ -19,3 +19,6 @@ GRANT ALL PRIVILEGES ON laravel_newsfeed_db.* TO 'laravel_newsfeed_user'@'localh
 
 5. (optional) You may want to seed db with random data:
   php artisan db:seed
+  
+6. Navigate to http://127.0.0.1:8000 in your browser after running:
+  php artisan serve

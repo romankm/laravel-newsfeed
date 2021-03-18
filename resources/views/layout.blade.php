@@ -10,10 +10,10 @@
 <body>
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">news</a>
+            <a class="nav-link active" aria-current="page" href="{{ route('root') }}">news</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="admin">admin page (/admin)</a>
+            <a class="nav-link" href="{{ route('admin-root') }}">admin page</a>
         </li>
     </ul>
 

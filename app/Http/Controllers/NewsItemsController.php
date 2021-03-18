@@ -46,7 +46,7 @@ class NewsItemsController extends Controller
      */
     public function show($id)
     {
-        $newsItem = NewsItem::find($id);
+        $newsItem = NewsItem::where('id', $id)->firstOrFail();
 
         return view('news_items.show', compact('newsItem'));
     }

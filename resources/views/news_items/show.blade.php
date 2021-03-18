@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="">
-        <a href="/"><< BACK</a>
+        <a href="{{ route('root') }}"><< BACK</a>
     </div>
-    <div class="card" style="width: 50rem;">
+    <div class="card">
         <div class="card-body">
             <h5 class="card-title">
                 {{ $newsItem->title }}
